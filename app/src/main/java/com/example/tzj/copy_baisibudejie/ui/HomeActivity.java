@@ -54,7 +54,7 @@ public class HomeActivity extends BaseActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         RequestServes requestServes = retrofit.create(RequestServes.class);
-        Call<String> call = requestServes.testHttpPost();
+        Call<RequestServes.ResponseInfo> call = requestServes.testHttpGet();
 //        Call<String> call = requestServes.testHttpPost("tencentyingyongbao",
 //                "864394010288340",
 //                "baisibudejie",
@@ -63,14 +63,13 @@ public class HomeActivity extends BaseActivity {
 //                "",
 //                "1C%3A83%3A41%3A13%3A80%3A8E",
 //                "6.7.2");
-        call.enqueue(new Callback<String>() {
+        call.enqueue(new Callback<RequestServes.ResponseInfo>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                LogUtil.e(response.body());
+            public void onResponse(Call<RequestServes.ResponseInfo> call, Response<RequestServes.ResponseInfo> response) {
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
+            public void onFailure(Call<RequestServes.ResponseInfo> call, Throwable t) {
                 LogUtil.e(t.getMessage().toString());
             }
         });
