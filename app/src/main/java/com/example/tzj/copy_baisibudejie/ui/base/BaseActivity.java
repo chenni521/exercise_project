@@ -3,6 +3,7 @@ package com.example.tzj.copy_baisibudejie.ui.base;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,11 +12,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.example.tzj.copy_baisibudejie.Constant;
 import com.example.tzj.copy_baisibudejie.R;
 import com.example.tzj.copy_baisibudejie.ui.view.ProgressBarDialog;
 import com.example.tzj.copy_baisibudejie.util.AllUrl;
+import com.zhy.autolayout.AutoLinearLayout;
 
 import butterknife.ButterKnife;
 
@@ -34,6 +38,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //当系统版本为4.4或者4.4以上时可以使用沉浸式状态栏
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Constant.canTransparent = true;
             //透明状态栏
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             //透明导航栏
@@ -51,11 +56,11 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     //  public abstract void initView();
 
+    public abstract int getContentLayout();
+
     public abstract void initData();
 
     public abstract void initOnClick();
-
-    public abstract int getContentLayout();
 
     /**
      * 开启等待层
@@ -110,4 +115,21 @@ public abstract class BaseActivity extends AppCompatActivity {
 //            });
 //        }
 //    }
+
+    /**
+     * 设置状态栏透明
+     */
+    protected void setTransparent(final View view) {
+        if (null != view && Constant.canTransparent) {
+            view.post(new Runnable() {
+                public void run() {
+                    Rect rect = new Rect();
+                    view.getWindowVisibleDisplayFrame(rect);
+                    LinearLayout.LayoutParams linearParams = (LinearLayout.LayoutParams) view.getLayoutParams();
+                    linearParams.height = rect.top;
+                    view.setLayoutParams(linearParams);
+                }
+            });
+        }
+    }
 }

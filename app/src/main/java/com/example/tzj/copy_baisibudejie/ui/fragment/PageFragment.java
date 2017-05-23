@@ -148,6 +148,7 @@ public class PageFragment extends Fragment {
                         if (view.getId() == R.id.content_video) {
                             Intent intent = new Intent(getActivity(), VideoActivity.class);
                             intent.putExtra("url", finalList.get(position).getVideo().getVideo().get(0));
+                            intent.putExtra("content",finalList.get(position).getText());
                             getActivity().startActivity(intent);
                         }
                     }
