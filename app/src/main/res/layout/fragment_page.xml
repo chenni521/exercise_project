@@ -9,19 +9,19 @@
     <ImageView
         android:id="@+id/fragment_page_image"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:scaleType="fitXY"
-        />
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:visibility="gone"/>
 
-    <ListView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/fragment_page_listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <TextView
+    <!--<TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center" />
+        android:gravity="center" />-->
 
 </LinearLayout>

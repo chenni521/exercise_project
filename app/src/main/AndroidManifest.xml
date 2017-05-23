@@ -3,6 +3,9 @@
     package="com.example.tzj.copy_baisibudejie">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- 触摸调整亮度需添加权限-->
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -28,6 +31,8 @@
             </intent-filter>
 
         </activity>
+
+        <activity android:name=".ui.VideoActivity"/>
     </application>
 
 </manifest>

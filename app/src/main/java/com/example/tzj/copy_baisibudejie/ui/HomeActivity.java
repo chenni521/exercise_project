@@ -9,7 +9,7 @@ import android.widget.ListView;
 
 import com.example.tzj.copy_baisibudejie.R;
 import com.example.tzj.copy_baisibudejie.adapter.MyFragmentPagerAdapter;
-import com.example.tzj.copy_baisibudejie.adapter.SideListviewAdapter;
+//import com.example.tzj.copy_baisibudejie.adapter.SideListviewAdapter;
 import com.example.tzj.copy_baisibudejie.entity.Bean1;
 import com.example.tzj.copy_baisibudejie.ui.base.BaseActivity;
 import com.example.tzj.copy_baisibudejie.util.LogUtil;
@@ -51,7 +51,7 @@ public class HomeActivity extends BaseActivity {
         tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
         infoViewpager.setAdapter(new MyFragmentPagerAdapter(getSupportFragmentManager(), HomeActivity.this));
         tabLayout.setupWithViewPager(infoViewpager);
-        leftDrawer.setAdapter(new SideListviewAdapter(HomeActivity.this));
+//        leftDrawer.setAdapter(new SideListviewAdapter(HomeActivity.this));
 
     }
 
