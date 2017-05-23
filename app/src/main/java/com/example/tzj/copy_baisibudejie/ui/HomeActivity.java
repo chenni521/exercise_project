@@ -1,6 +1,5 @@
 package com.example.tzj.copy_baisibudejie.ui;
 
-import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -11,12 +10,20 @@ import android.widget.ListView;
 import com.example.tzj.copy_baisibudejie.R;
 import com.example.tzj.copy_baisibudejie.adapter.MyFragmentPagerAdapter;
 import com.example.tzj.copy_baisibudejie.adapter.SideListviewAdapter;
+import com.example.tzj.copy_baisibudejie.entity.Bean1;
 import com.example.tzj.copy_baisibudejie.ui.base.BaseActivity;
 import com.example.tzj.copy_baisibudejie.util.LogUtil;
 import com.example.tzj.copy_baisibudejie.util.RequestServes;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -45,36 +52,10 @@ public class HomeActivity extends BaseActivity {
         infoViewpager.setAdapter(new MyFragmentPagerAdapter(getSupportFragmentManager(), HomeActivity.this));
         tabLayout.setupWithViewPager(infoViewpager);
         leftDrawer.setAdapter(new SideListviewAdapter(HomeActivity.this));
-        getRetrofit();
-    }
-
-    private void getRetrofit() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(allUrl.HOME_TITLE_IMAGE)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        RequestServes requestServes = retrofit.create(RequestServes.class);
-        Call<RequestServes.ResponseInfo> call = requestServes.testHttpGet();
-//        Call<String> call = requestServes.testHttpPost("tencentyingyongbao",
-//                "864394010288340",
-//                "baisibudejie",
-//                "4.4.2",
-//                "android",
-//                "",
-//                "1C%3A83%3A41%3A13%3A80%3A8E",
-//                "6.7.2");
-        call.enqueue(new Callback<RequestServes.ResponseInfo>() {
-            @Override
-            public void onResponse(Call<RequestServes.ResponseInfo> call, Response<RequestServes.ResponseInfo> response) {
-            }
-
-            @Override
-            public void onFailure(Call<RequestServes.ResponseInfo> call, Throwable t) {
-                LogUtil.e(t.getMessage().toString());
-            }
-        });
 
     }
+
+
 
     @Override
     public void initOnClick() {
@@ -85,5 +66,25 @@ public class HomeActivity extends BaseActivity {
         return R.layout.activity_home;
     }
 
+    public class Contributor {
+        private String login;
+        private Integer contributions;
+
+        public String getLogin() {
+            return login;
+        }
+
+        public void setLogin(String login) {
+            this.login = login;
+        }
+
+        public Integer getContributions() {
+            return contributions;
+        }
+
+        public void setContributions(Integer contributions) {
+            this.contributions = contributions;
+        }
+    }
 
 }
