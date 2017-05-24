@@ -19,6 +19,7 @@ import com.example.tzj.copy_baisibudejie.R;
 import com.example.tzj.copy_baisibudejie.adapter.RecommendAdapter;
 import com.example.tzj.copy_baisibudejie.entity.Bean1;
 import com.example.tzj.copy_baisibudejie.entity.RecommendVo;
+import com.example.tzj.copy_baisibudejie.ui.ImageActivity;
 import com.example.tzj.copy_baisibudejie.ui.VideoActivity;
 import com.example.tzj.copy_baisibudejie.util.AllUrl;
 import com.example.tzj.copy_baisibudejie.util.LogUtil;
@@ -101,7 +102,7 @@ public class PageFragment extends Fragment {
         call.enqueue(new Callback<Bean1>() {
             @Override
             public void onResponse(Call<Bean1> call, Response<Bean1> response) {
-                LogUtil.e(response.body().toString());
+//                LogUtil.e(response.body().toString());
                 Bean1 bean1 = response.body();
                 String url = bean1.getResult().getJingxuan().get_$1().get(0).getImage();
                 Glide.with(getActivity())
@@ -131,7 +132,7 @@ public class PageFragment extends Fragment {
         call.enqueue(new Callback<RecommendVo>() {
             @Override
             public void onResponse(Call<RecommendVo> call, Response<RecommendVo> response) {
-                LogUtil.e(response.body().toString());
+//                LogUtil.e(response.body().toString());
                 RecommendVo bean1 = response.body();
 
                 List<RecommendVo.ListBean> list = new ArrayList<RecommendVo.ListBean>();
@@ -149,6 +150,10 @@ public class PageFragment extends Fragment {
                             Intent intent = new Intent(getActivity(), VideoActivity.class);
                             intent.putExtra("url", finalList.get(position).getVideo().getVideo().get(0));
                             intent.putExtra("content",finalList.get(position).getText());
+                            getActivity().startActivity(intent);
+                        } else if (view.getId() == R.id.content_gif) {
+                            Intent intent = new Intent(getActivity(), ImageActivity.class);
+                            intent.putExtra("url",finalList.get(position).getImage().getBig().get(0));
                             getActivity().startActivity(intent);
                         }
                     }
