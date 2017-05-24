@@ -1,6 +1,7 @@
 package com.example.tzj.copy_baisibudejie.util;
 
-import com.example.tzj.copy_baisibudejie.entity.HeaderBena;
+import com.example.tzj.copy_baisibudejie.entity.Bean1;
+import com.example.tzj.copy_baisibudejie.entity.RecommendVo;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -14,7 +15,7 @@ import retrofit2.http.POST;
 public interface RequestServes {
     @FormUrlEncoded
     @POST("/op2/promotion/budejie-android-6.7.2-tencentyingyongbao/0-20.json")
-    Call<HeaderBena> headerHttpPost(@Field("market") String market
+    Call<Bean1> headerHttpPost(@Field("market") String market
             , @Field("udid") String udid
             , @Field("appname") String appname
             , @Field("os") String os
@@ -25,7 +26,7 @@ public interface RequestServes {
     );
     @FormUrlEncoded
     @POST("topic/list/jingxuan/1/budejie-android-6.7.2/0-20.json")
-    Call<HeaderBena> recommendHttpPost(@Field("market") String market
+    Call<RecommendVo> recommendHttpPost(@Field("market") String market
             , @Field("udid") String udid
             , @Field("appname") String appname
             , @Field("os") String os

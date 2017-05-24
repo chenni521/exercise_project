@@ -1,17 +1,19 @@
 package com.example.tzj.copy_baisibudejie.ui;
 
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 
 import com.example.tzj.copy_baisibudejie.R;
 import com.example.tzj.copy_baisibudejie.adapter.MyFragmentPagerAdapter;
-import com.example.tzj.copy_baisibudejie.adapter.SideListviewAdapter;
 import com.example.tzj.copy_baisibudejie.ui.base.BaseActivity;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class HomeActivity extends BaseActivity {
 
@@ -26,6 +28,8 @@ public class HomeActivity extends BaseActivity {
     ListView leftDrawer;
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
+    @BindView(R.id.title_left_topView)
+    View titleLeftTopView;
 
 
     @Override
@@ -35,10 +39,9 @@ public class HomeActivity extends BaseActivity {
         infoViewpager.setAdapter(new MyFragmentPagerAdapter(getSupportFragmentManager(), HomeActivity.this));
         infoViewpager.setOffscreenPageLimit(0);
         tabLayout.setupWithViewPager(infoViewpager);
-        leftDrawer.setAdapter(new SideListviewAdapter(HomeActivity.this));
-
+        //   leftDrawer.setAdapter(new SideListviewAdapter(HomeActivity.this));
+        setTransparent(titleLeftTopView);
     }
-
 
 
     @Override
@@ -49,6 +52,7 @@ public class HomeActivity extends BaseActivity {
     public int getContentLayout() {
         return R.layout.activity_home;
     }
+
 
     public class Contributor {
         private String login;
