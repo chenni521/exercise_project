@@ -8,7 +8,7 @@ import java.util.List;
  * Created by psj on 2017/5/22.
  */
 
-public class Bean1 {
+public class HeaderBena {
 
     /**
      * info : {"count":1,"when":"2017-05-22 16:02:19","host":"db2","pid":170178}
