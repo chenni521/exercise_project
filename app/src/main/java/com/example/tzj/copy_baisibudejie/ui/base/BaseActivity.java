@@ -60,12 +60,13 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * 开启等待层
      */
-    public void showProgressDialog() {
+    public void showProgressDialog(boolean isStart) {
         if (progressBarDialog == null) {
-            progressBarDialog = new ProgressBarDialog(this, true);
+            progressBarDialog = new ProgressBarDialog(this, isStart);
             progressBarDialog.setCanceledOnTouchOutside(false);
             progressBarDialog.setCancelable(true);
         }
+        progressBarDialog.showLoading(isStart);
         progressBarDialog.show();
     }
 
