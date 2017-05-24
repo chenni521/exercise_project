@@ -1,19 +1,12 @@
 package com.example.tzj.copy_baisibudejie.ui;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.PointF;
-import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
 import android.view.View;
-import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.davemorrissey.labs.subscaleview.ImageSource;
@@ -22,17 +15,13 @@ import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.example.tzj.copy_baisibudejie.R;
 import com.example.tzj.copy_baisibudejie.ui.base.BaseActivity;
 import com.example.tzj.copy_baisibudejie.util.LogUtil;
-import com.example.tzj.copy_baisibudejie.util.progress.ProgressImageView;
-import com.example.tzj.copy_baisibudejie.util.progress.ProgressModelLoader;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.lang.ref.WeakReference;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by psj on 2017/5/24.
