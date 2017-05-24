@@ -23,12 +23,12 @@ public class ProgressBarDialog extends Dialog {
     private Context context;
     private View mView;
     private AnimationDrawable mFlyDrawable;
-    private boolean show;
+    private boolean show1;
 
-    public ProgressBarDialog(Context context, boolean show) {
+    public ProgressBarDialog(Context context, boolean show1) {
         super(context, R.style.WaitingDialogStyle);
         this.context = context;
-        this.show = show;
+        this.show1 = show1;
     }
 
     @Override
@@ -51,14 +51,15 @@ public class ProgressBarDialog extends Dialog {
     private void initData() {
         flyIconIv = (ImageView) findViewById(R.id.fly_icon_iv);
         mFlyDrawable = (AnimationDrawable) flyIconIv.getDrawable();
-        showLoading(show);
+        showLoading(show1);
 
     }
 
-    private void showLoading(boolean show) {
+    public void showLoading(boolean show) {
         if (mFlyDrawable != null) {
             if (show) {
                 mFlyDrawable.start();
+                show1=false;
             } else {
                 mFlyDrawable.stop();
             }

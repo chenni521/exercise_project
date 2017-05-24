@@ -38,4 +38,6 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0-RC0'
 
     compile 'com.zhy:autolayout:1.4.5'//鸿洋适配
+    compile 'org.lynxz.zzplayerlibrarys:zzplayer:1.0.4'//播放mp4的库
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.16'
 }

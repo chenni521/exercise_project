@@ -17,7 +17,7 @@ import butterknife.ButterKnife;
  * Created by tzj on 2017/5/22.
  */
 
-public class SideListviewAdapter extends BaseAdapter {
+/*public class SideListviewAdapter extends BaseAdapter {
     private String item[] = {"精华", "新帖", "败家姐", "我的"};
     private Context context;
 
@@ -45,7 +45,7 @@ public class SideListviewAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder = null;
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.listview_item, parent, false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.video_listview_item, parent, false);
             viewHolder = new ViewHolder(convertView);
             convertView.setTag(viewHolder);
         } else {
@@ -65,4 +65,4 @@ public class SideListviewAdapter extends BaseAdapter {
             ButterKnife.bind(this, view);
         }
     }
-}
+}*/

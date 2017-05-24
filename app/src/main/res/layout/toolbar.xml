@@ -1,35 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/rl_toolbar"
     android:layout_width="match_parent"
     android:layout_height="40dp"
     android:background="#ff2d55"
     android:orientation="vertical">
 
+    <View
+        android:id="@+id/title_left_topView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#ff2d55" />
 
-    <ImageView
-        android:id="@+id/rl_toolbar_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="10dp"
-        android:src="@mipmap/top_games_btn_pressed" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/rl_toolbar_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="百思不得姐"
-        android:textColor="@color/color_white" />
+        <ImageView
+            android:id="@+id/rl_toolbar_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10px"
+            android:src="@mipmap/top_games_btn_pressed" />
 
-    <ImageView
-        android:id="@+id/rl_toolbar_image1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="10dp"
-        android:src="@mipmap/top_games_btn_pressed" />
-</RelativeLayout>
+        <TextView
+            android:id="@+id/rl_toolbar_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="百思不得姐"
+            android:textSize="16sp"
+            android:textColor="@color/color_white" />
+
+        <ImageView
+            android:id="@+id/rl_toolbar_image1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10px"
+            android:src="@mipmap/top_games_btn_pressed" />
+
+    </RelativeLayout>
+</LinearLayout>

@@ -24,4 +24,11 @@
     <color name="mask_tags_10">#478de4</color>
     <color name="mask_tags_11">#ffa319</color>
     <color name="mask_tags_12">#f08945</color>
+
+    <color name="black">#000000</color>
+    <color name="date_color">#8b8b8b</color>
+    <color name="u_name_color">#5580b1</color>
+    <color name="text_content_color">#333333</color>
+
+
 </resources>
