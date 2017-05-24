@@ -60,14 +60,14 @@ public class ImageActivity extends BaseActivity {
             url = intent.getStringExtra("url");
         }
 
-        addPic(progressImageview,url);
+        addPic(progressImageview, url);
 
     }
 
-    private void addPic(final SubsamplingScaleImageView imageView, String url) {
+    private void addPic(final SubsamplingScaleImageView imageView, final String url) {
         imageView.setMinimumScaleType(SubsamplingScaleImageView.SCALE_TYPE_CUSTOM);
         imageView.setMinScale(1.0F);
-        final File downDir = Environment.getExternalStorageDirectory();
+        final String downPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/glide/";
         //使用Glide下载图片,保存到本地
         Glide.with(this)
                 .load(url)
@@ -75,9 +75,13 @@ public class ImageActivity extends BaseActivity {
                 .into(new SimpleTarget<Bitmap>() {
                     @Override
                     public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-                        File file = new File(downDir, "/m_1385635534691.jpg");
+                        String[] urlArray = url.split("/");
+                        LogUtil.e(url);
+                        LogUtil.e(urlArray[urlArray.length - 1]);
+                        File file = new File(downPath + urlArray[urlArray.length - 1]);
                         if (!file.exists()) {
                             try {
+                                file.getParentFile().mkdirs();
                                 file.createNewFile();
                             } catch (IOException e) {
                                 e.printStackTrace();
@@ -90,7 +94,7 @@ public class ImageActivity extends BaseActivity {
                             fout = new FileOutputStream(file);
                             resource.compress(Bitmap.CompressFormat.JPEG, 100, fout);
                             // 将保存的地址给SubsamplingScaleImageView,这里注意设置ImageViewState
-                            imageView.setImage(ImageSource.uri(file.getAbsolutePath()), new ImageViewState(0.5F, new PointF(0, 0), 0));
+                            imageView.setImage(ImageSource.uri(file.getAbsolutePath()), new ImageViewState(2.0F, new PointF(0, 0), 0));
                         } catch (FileNotFoundException e) {
                             e.printStackTrace();
                         } finally {
