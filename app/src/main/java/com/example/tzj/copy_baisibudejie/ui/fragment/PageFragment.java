@@ -21,6 +21,8 @@ import com.example.tzj.copy_baisibudejie.entity.Bean1;
 import com.example.tzj.copy_baisibudejie.entity.RecommendVo;
 import com.example.tzj.copy_baisibudejie.ui.ImageActivity;
 import com.example.tzj.copy_baisibudejie.ui.VideoActivity;
+import com.example.tzj.copy_baisibudejie.ui.base.BaseActivity;
+import com.example.tzj.copy_baisibudejie.ui.base.LazyFragment;
 import com.example.tzj.copy_baisibudejie.util.AllUrl;
 import com.example.tzj.copy_baisibudejie.util.LogUtil;
 import com.example.tzj.copy_baisibudejie.util.RequestServes;
@@ -39,13 +41,19 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PageFragment extends Fragment {
+public class PageFragment extends LazyFragment {
     public static final String ARGS_PAGE = "args_page";
     @BindView(R.id.fragment_page_image)
     ImageView fragmentPageImage;
     @BindView(R.id.fragment_page_listview)
     RecyclerView fragmentPageListview;
     private int mPage;
+    // 标志位，标志已经初始化完成。
+    private boolean isPrepared;
+
+    private Bean1 bean1=new Bean1();
+    private RecommendVo recommendVo=new RecommendVo();
+    private BaseActivity baseActivity;
 
    /* @BindView(R.id.textView)
     TextView textView;*/
@@ -57,6 +65,17 @@ public class PageFragment extends Fragment {
         PageFragment fragment = new PageFragment();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    protected void lazyLoad() {
+        if (!isPrepared || !isVisible) {
+            return;
+        }
+        baseActivity= (BaseActivity) getActivity();
+        //填充各控件的数据
+        getRetrofit();
+        getRecommendInterface();
     }
 
     /**
@@ -84,8 +103,8 @@ public class PageFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_page, container, false);
         ButterKnife.bind(this, view);
 //        textView.setText("第" + mPage + "页");
-        getRetrofit();
-        getRecommendInterface();
+        isPrepared = true;
+        lazyLoad();
         return view;
     }
 
@@ -149,11 +168,11 @@ public class PageFragment extends Fragment {
                         if (view.getId() == R.id.content_video) {
                             Intent intent = new Intent(getActivity(), VideoActivity.class);
                             intent.putExtra("url", finalList.get(position).getVideo().getVideo().get(0));
-                            intent.putExtra("content",finalList.get(position).getText());
+                            intent.putExtra("content", finalList.get(position).getText());
                             getActivity().startActivity(intent);
                         } else if (view.getId() == R.id.content_gif) {
                             Intent intent = new Intent(getActivity(), ImageActivity.class);
-                            intent.putExtra("url",finalList.get(position).getImage().getBig().get(0));
+                            intent.putExtra("url", finalList.get(position).getImage().getBig().get(0));
                             getActivity().startActivity(intent);
                         }
                     }
@@ -166,4 +185,6 @@ public class PageFragment extends Fragment {
             }
         });
     }
+
+
 }
