@@ -39,7 +39,7 @@ public class RecommendAdapter extends BaseMultiItemQuickAdapter<RecommendVo.List
 
     @Override
     protected void convert(BaseViewHolder helper, RecommendVo.ListBean item) {
-        LogUtil.e(helper.getItemViewType() + "");
+//        LogUtil.e(helper.getItemViewType() + "");
         switch (helper.getItemViewType()) {
             case RecommendVo.ListBean.GIF:
                 ImageView imageView = helper.getView(R.id.content_gif);
@@ -56,6 +56,8 @@ public class RecommendAdapter extends BaseMultiItemQuickAdapter<RecommendVo.List
 
             case RecommendVo.ListBean.IMAGE:
                 ImageView imageView2 = helper.getView(R.id.content_gif);
+                imageView2.setScaleType(ImageView.ScaleType.MATRIX);
+//                imageView2.setAdjustViewBounds(true);
                 Glide.with(context)
                         .load(item.getImage().getBig().get(0))
                         .into(imageView2);
@@ -65,6 +67,8 @@ public class RecommendAdapter extends BaseMultiItemQuickAdapter<RecommendVo.List
                         .into((ImageView) helper.getView(R.id.user_img));
                 helper.setText(R.id.user_name, item.getU().getName());
                 helper.setText(R.id.user_date, item.getPasstime());
+                helper.setText(R.id.content_text,item.getText());
+                helper.addOnClickListener(R.id.content_gif);
                 break;
 
             case RecommendVo.ListBean.TEXT:
