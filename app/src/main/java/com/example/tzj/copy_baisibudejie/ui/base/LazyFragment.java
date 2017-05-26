@@ -33,5 +33,6 @@ public abstract class LazyFragment extends Fragment {
     protected abstract void lazyLoad();
 
     protected void onInvisible() {
+        return;
     }
 }

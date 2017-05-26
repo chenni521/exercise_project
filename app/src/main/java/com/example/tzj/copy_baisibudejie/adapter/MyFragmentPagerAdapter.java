@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.example.tzj.copy_baisibudejie.ui.fragment.BlankFragment;
 import com.example.tzj.copy_baisibudejie.ui.fragment.PageFragment;
 
 /**
@@ -22,6 +23,11 @@ public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
+        if (position == 0) {
+            return PageFragment.newInstance(position + 1);
+        } else if (position == 1) {
+            return BlankFragment.newInstance(position + 1);
+        }
         return PageFragment.newInstance(position + 1);
     }
 

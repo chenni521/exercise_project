@@ -9,4 +9,5 @@ public class Constant {
      * 是否可以透明化状态栏sdk>19即可
      */
     public static boolean canTransparent = false;
+
 }

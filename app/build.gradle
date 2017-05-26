@@ -25,24 +25,29 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
+    //Retrofit2所需要的包
+    //ConverterFactory的Gson依赖包
+    //ConverterFactory的String依赖包
+
+    //鸿洋适配
+    //播放mp4的库
+
+    //长图
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:support-v4:25.3.1'
     compile 'com.android.support:design:25.3.1'
     compile 'com.jakewharton:butterknife:8.4.0'
-    testCompile 'junit:junit:4.12'
-    apt 'com.jakewharton:butterknife-compiler:8.4.0'
-    compile 'com.squareup.retrofit2:retrofit:2.0.0-beta4'//Retrofit2所需要的包
-    compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta4'//ConverterFactory的Gson依赖包
-    compile 'com.squareup.retrofit2:converter-scalars:2.0.0-beta4'//ConverterFactory的String依赖包
-    
+    compile 'com.squareup.retrofit2:retrofit:2.0.0-beta4'
+    compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta4'
+    compile 'com.squareup.retrofit2:converter-scalars:2.0.0-beta4'
     compile 'com.github.bumptech.glide:glide:3.7.0'
-
-    compile 'com.zhy:autolayout:1.4.5'//鸿洋适配
-    compile 'org.lynxz.zzplayerlibrarys:zzplayer:1.0.4'//播放mp4的库
+    compile 'com.zhy:autolayout:1.4.5'
+    compile 'org.lynxz.zzplayerlibrarys:zzplayer:1.0.4'
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.16'
-
     compile 'com.squareup.okhttp:okhttp:2.4.0'
     compile 'com.squareup.okio:okio:1.5.0'
-
-    compile 'com.davemorrissey.labs:subsampling-scale-image-view:3.5.0'//长图
+    compile 'com.davemorrissey.labs:subsampling-scale-image-view:3.5.0'
+    testCompile 'junit:junit:4.12'
+    apt 'com.jakewharton:butterknife-compiler:8.4.0'
+    compile 'cn.bingoogolapple:bga-refreshlayout:1.1.7@aar'
 }

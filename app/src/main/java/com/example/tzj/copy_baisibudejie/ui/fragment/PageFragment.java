@@ -10,8 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -32,6 +30,10 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.bingoogolapple.refreshlayout.BGAMoocStyleRefreshViewHolder;
+import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder;
+import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
+import cn.bingoogolapple.refreshlayout.BGARefreshViewHolder;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -41,19 +43,27 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PageFragment extends LazyFragment {
+public class PageFragment extends LazyFragment implements BGARefreshLayout.BGARefreshLayoutDelegate {
     public static final String ARGS_PAGE = "args_page";
     @BindView(R.id.fragment_page_image)
     ImageView fragmentPageImage;
     @BindView(R.id.fragment_page_listview)
     RecyclerView fragmentPageListview;
+    @BindView(R.id.bga)
+    BGARefreshLayout bga;
     private int mPage;
     // 标志位，标志已经初始化完成。
     private boolean isPrepared;
+    private int firstPositon = 0;
+    private int lastPosition = 5;
+    private int page = 1;
+    private int removeList =0;
 
-    private Bean1 bean1=new Bean1();
-    private RecommendVo recommendVo=new RecommendVo();
+    private Bean1 bean1 = new Bean1();
+    private RecommendVo recommendVo = new RecommendVo();
     private BaseActivity baseActivity;
+    private List<RecommendVo.ListBean> list = new ArrayList<RecommendVo.ListBean>();
+    private RecommendAdapter recommendAdapter;
 
    /* @BindView(R.id.textView)
     TextView textView;*/
@@ -72,10 +82,23 @@ public class PageFragment extends LazyFragment {
         if (!isPrepared || !isVisible) {
             return;
         }
-        baseActivity= (BaseActivity) getActivity();
-        //填充各控件的数据
+        baseActivity = (BaseActivity) getActivity();
+        initRefreshLayout();
         getRetrofit();
-        getRecommendInterface();
+        getRecommendInterface(0, 5);
+        //填充各控件的数据
+        recommendAdapter = new RecommendAdapter(list, getActivity());
+        fragmentPageListview.setLayoutManager(new LinearLayoutManager(getActivity()));
+        fragmentPageListview.setAdapter(recommendAdapter);
+    }
+
+    private void initRefreshLayout() {
+        bga.setDelegate(this);
+        BGAMoocStyleRefreshViewHolder refreshViewHolder = new BGAMoocStyleRefreshViewHolder(getActivity(), true);
+        refreshViewHolder.setOriginalImage(R.mipmap.bga_refresh_mt_refreshing_01);
+        refreshViewHolder.setUltimateColor(R.color.imoocstyle);
+        bga.setRefreshViewHolder(refreshViewHolder);
+
     }
 
     /**
@@ -138,8 +161,9 @@ public class PageFragment extends LazyFragment {
 
     }
 
-    private void getRecommendInterface() {
-        Call<RecommendVo> call = requestServes.recommendHttpPost("tencentyingyongbao",
+    private void getRecommendInterface(int firstPositon, final int lastPosition) {
+        baseActivity.showProgressDialog(true);
+        Call<RecommendVo> call = requestServes.recommendHttpPost(firstPositon, lastPosition, "tencentyingyongbao",
                 "864394010288340",
                 "baisibudejie",
                 "4.4.2",
@@ -153,14 +177,13 @@ public class PageFragment extends LazyFragment {
             public void onResponse(Call<RecommendVo> call, Response<RecommendVo> response) {
 //                LogUtil.e(response.body().toString());
                 RecommendVo bean1 = response.body();
-
-                List<RecommendVo.ListBean> list = new ArrayList<RecommendVo.ListBean>();
+                list.clear();
                 list = bean1.getList();
-
-                RecommendAdapter recommendAdapter = new RecommendAdapter(list, getActivity());
-                fragmentPageListview.setLayoutManager(new LinearLayoutManager(getActivity()));
-                fragmentPageListview.setAdapter(recommendAdapter);
-
+                if (page >= 2) {
+                    for (int i = 0; i < lastPosition-5; i++) {
+                        list.remove(0);
+                    }
+                }
                 final List<RecommendVo.ListBean> finalList = list;
                 recommendAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
                     @Override
@@ -177,6 +200,11 @@ public class PageFragment extends LazyFragment {
                         }
                     }
                 });
+                baseActivity.hideProgressDialog();
+                recommendAdapter.addData(list);
+                recommendAdapter.notifyDataSetChanged();
+                bga.endRefreshing();
+                bga.endLoadingMore();
             }
 
             @Override
@@ -187,4 +215,28 @@ public class PageFragment extends LazyFragment {
     }
 
 
+    @Override
+    public void onBGARefreshLayoutBeginRefreshing(BGARefreshLayout refreshLayout) {
+        getRecommendInterface(0, 5);
+    }
+
+    @Override
+    public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
+
+        //    firstPositon=firstPositon+5;
+        lastPosition = lastPosition + 5;
+        getRecommendInterface(firstPositon, lastPosition);
+        page++;
+        return false;
+    }
+
+    // 通过代码方式控制进入正在刷新状态。应用场景：某些应用在 activity 的 onStart 方法中调用，自动进入正在刷新状态获取最新数据
+    public void beginRefreshing() {
+        bga.beginRefreshing();
+    }
+
+    // 通过代码方式控制进入加载更多状态
+    public void beginLoadingMore() {
+        bga.beginLoadingMore();
+    }
 }
