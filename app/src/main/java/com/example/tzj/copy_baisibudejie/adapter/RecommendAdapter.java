@@ -52,6 +52,7 @@ public class RecommendAdapter extends BaseMultiItemQuickAdapter<RecommendVo.List
                         .into((ImageView) helper.getView(R.id.user_img));
                 helper.setText(R.id.user_name, item.getU().getName());
                 helper.setText(R.id.user_date, item.getPasstime());
+                helper.setText(R.id.content_text,item.getText());
                 break;
 
             case RecommendVo.ListBean.IMAGE:

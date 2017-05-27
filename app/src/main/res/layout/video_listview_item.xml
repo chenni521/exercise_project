@@ -7,7 +7,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30px"
+        android:layout_marginLeft="10px"
         android:layout_marginTop="22px"
         android:orientation="horizontal">
 
@@ -15,7 +15,6 @@
             android:id="@+id/user_img"
             android:layout_width="153px"
             android:layout_height="153px"
-            android:layout_marginLeft="19px"
             android:scaleType="centerCrop" />
 
         <LinearLayout
@@ -42,9 +41,8 @@
         android:id="@+id/content_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="30px"
+        android:layout_margin="10px"
         android:textColor="@color/text_content_color"
-
         android:textSize="16sp" />
 
     <RelativeLayout

@@ -78,6 +78,7 @@ public class ImageActivity extends BaseActivity {
         Glide.with(this)
                 .load(url)
                 .asBitmap()
+                .placeholder(R.mipmap.loading)
                 .into(new SimpleTarget<Bitmap>() {
                     @Override
                     public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
