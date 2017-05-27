@@ -31,6 +31,10 @@ public class HomeActivity extends BaseActivity {
     @BindView(R.id.title_left_topView)
     View titleLeftTopView;
 
+    @Override
+    public int getContentLayout() {
+        return R.layout.activity_home;
+    }
 
     @Override
     public void initData() {
@@ -46,11 +50,6 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     public void initOnClick() {
-    }
-
-    @Override
-    public int getContentLayout() {
-        return R.layout.activity_home;
     }
 
 

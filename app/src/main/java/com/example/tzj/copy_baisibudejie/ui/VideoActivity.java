@@ -37,6 +37,7 @@ public class VideoActivity extends BaseActivity {
             content = intent.getStringExtra("content");
         }
         if (mVideoUrl != null && !mVideoUrl.equals("")) {
+            vp.setTitle(content);
             vp.loadAndStartVideo(this, mVideoUrl);
         }
 

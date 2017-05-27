@@ -32,6 +32,6 @@
     <color name="date_color">#8b8b8b</color>
     <color name="u_name_color">#5580b1</color>
     <color name="text_content_color">#333333</color>
-
+    <color name="title_color">#ff2d55</color>
 
 </resources>

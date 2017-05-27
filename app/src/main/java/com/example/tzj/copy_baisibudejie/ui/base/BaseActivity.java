@@ -7,6 +7,7 @@ import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +33,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     private ProgressBarDialog progressBarDialog;
     public AllUrl allUrl;
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         this.supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -42,7 +44,8 @@ public abstract class BaseActivity extends AppCompatActivity {
             //透明状态栏
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             //透明导航栏
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+//            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+            getWindow().setNavigationBarColor(getResources().getColor(R.color.title_color,getTheme()));
         }
         if (getContentLayout() != 0) {
             setContentView(getContentLayout());
