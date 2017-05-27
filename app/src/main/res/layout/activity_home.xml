@@ -18,10 +18,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#ff2d55"
-            app:tabIndicatorColor="@color/color_white"
-            app:tabIndicatorHeight="5dp"
-            app:tabSelectedTextColor="@color/color_white"
-            app:tabTextColor="@color/color_white" />
+            app:tabIndicatorColor="@color/transparent"
+            app:tabIndicatorHeight="2dp"
+            app:tabSelectedTextColor="@color/mask_tags_2"
+            app:tabTextColor="@color/color_white"
+            android:elevation="10dp"/>
 
         <android.support.v4.view.ViewPager
             android:id="@+id/info_viewpager"
