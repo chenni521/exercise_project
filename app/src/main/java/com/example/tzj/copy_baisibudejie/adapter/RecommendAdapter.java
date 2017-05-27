@@ -56,7 +56,7 @@ public class RecommendAdapter extends BaseMultiItemQuickAdapter<RecommendVo.List
 
             case RecommendVo.ListBean.IMAGE:
                 ImageView imageView2 = helper.getView(R.id.content_gif);
-                imageView2.setScaleType(ImageView.ScaleType.MATRIX);
+//                imageView2.setScaleType(ImageView.ScaleType.FIT_CENTER);
 //                imageView2.setAdjustViewBounds(true);
                 Glide.with(context)
                         .load(item.getImage().getBig().get(0))
