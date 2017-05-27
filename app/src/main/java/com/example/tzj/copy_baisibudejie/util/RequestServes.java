@@ -31,7 +31,7 @@ public interface RequestServes {
     @FormUrlEncoded
     @POST("topic/list/jingxuan/1/budejie-android-6.7.2/{firstPositon}-{lastPosition}.json")
     Call<RecommendVo> recommendHttpPost(
-            @Path("firstPositon") int firstPositon,
+            @Path("firstPositon") long firstPositon,
             @Path("lastPosition") int lastPosition,
             @Field("market") String market
             , @Field("udid") String udid

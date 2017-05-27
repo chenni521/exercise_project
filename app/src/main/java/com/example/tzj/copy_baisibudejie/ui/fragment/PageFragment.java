@@ -23,8 +23,10 @@ import com.example.tzj.copy_baisibudejie.ui.base.BaseActivity;
 import com.example.tzj.copy_baisibudejie.ui.base.LazyFragment;
 import com.example.tzj.copy_baisibudejie.util.AllUrl;
 import com.example.tzj.copy_baisibudejie.util.LogUtil;
+import com.example.tzj.copy_baisibudejie.util.MyUtil;
 import com.example.tzj.copy_baisibudejie.util.RequestServes;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,16 +56,16 @@ public class PageFragment extends LazyFragment implements BGARefreshLayout.BGARe
     private int mPage;
     // 标志位，标志已经初始化完成。
     private boolean isPrepared;
-    private int firstPositon = 0;
-    private int lastPosition = 5;
     private int page = 1;
-    private int removeList =0;
+    private int removeList = 0;
 
     private Bean1 bean1 = new Bean1();
     private RecommendVo recommendVo = new RecommendVo();
     private BaseActivity baseActivity;
     private List<RecommendVo.ListBean> list = new ArrayList<RecommendVo.ListBean>();
+    private List<RecommendVo.ListBean> AllList = new ArrayList<RecommendVo.ListBean>();
     private RecommendAdapter recommendAdapter;
+    private List<RecommendVo.ListBean> finalList = new ArrayList<RecommendVo.ListBean>();
 
    /* @BindView(R.id.textView)
     TextView textView;*/
@@ -161,7 +163,7 @@ public class PageFragment extends LazyFragment implements BGARefreshLayout.BGARe
 
     }
 
-    private void getRecommendInterface(int firstPositon, final int lastPosition) {
+    private void getRecommendInterface(long firstPositon, final int lastPosition) {
         baseActivity.showProgressDialog(true);
         Call<RecommendVo> call = requestServes.recommendHttpPost(firstPositon, lastPosition, "tencentyingyongbao",
                 "864394010288340",
@@ -177,14 +179,10 @@ public class PageFragment extends LazyFragment implements BGARefreshLayout.BGARe
             public void onResponse(Call<RecommendVo> call, Response<RecommendVo> response) {
 //                LogUtil.e(response.body().toString());
                 RecommendVo bean1 = response.body();
-                list.clear();
+//                list.clear();
                 list = bean1.getList();
-                if (page >= 2) {
-                    for (int i = 0; i < lastPosition-5; i++) {
-                        list.remove(0);
-                    }
-                }
-                final List<RecommendVo.ListBean> finalList = list;
+
+                finalList.addAll(list);
                 recommendAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
                     @Override
                     public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
@@ -222,10 +220,14 @@ public class PageFragment extends LazyFragment implements BGARefreshLayout.BGARe
 
     @Override
     public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
+        try {
+            LogUtil.e(list.get(list.size()-1).getPasstime());
 
-        //    firstPositon=firstPositon+5;
-        lastPosition = lastPosition + 5;
-        getRecommendInterface(firstPositon, lastPosition);
+            long lastTime= Long.parseLong(MyUtil.dateToStamp(list.get(list.size()-1).getPasstime().trim()));
+            getRecommendInterface(lastTime, 5);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         page++;
         return false;
     }
