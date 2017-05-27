@@ -89,7 +89,7 @@ public class PageFragment extends LazyFragment implements BGARefreshLayout.BGARe
         getRetrofit();
         getRecommendInterface(0, 5);
         //填充各控件的数据
-        recommendAdapter = new RecommendAdapter(list, getActivity());
+        recommendAdapter = new RecommendAdapter(finalList, getActivity());
         fragmentPageListview.setLayoutManager(new LinearLayoutManager(getActivity()));
         fragmentPageListview.setAdapter(recommendAdapter);
     }
@@ -163,7 +163,7 @@ public class PageFragment extends LazyFragment implements BGARefreshLayout.BGARe
 
     }
 
-    private void getRecommendInterface(long firstPositon, final int lastPosition) {
+    private void getRecommendInterface(final long firstPositon, final int lastPosition) {
         baseActivity.showProgressDialog(true);
         Call<RecommendVo> call = requestServes.recommendHttpPost(firstPositon, lastPosition, "tencentyingyongbao",
                 "864394010288340",
@@ -179,9 +179,8 @@ public class PageFragment extends LazyFragment implements BGARefreshLayout.BGARe
             public void onResponse(Call<RecommendVo> call, Response<RecommendVo> response) {
 //                LogUtil.e(response.body().toString());
                 RecommendVo bean1 = response.body();
-//                list.clear();
+                list.clear();
                 list = bean1.getList();
-
                 finalList.addAll(list);
                 recommendAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
                     @Override
@@ -199,7 +198,7 @@ public class PageFragment extends LazyFragment implements BGARefreshLayout.BGARe
                     }
                 });
                 baseActivity.hideProgressDialog();
-                recommendAdapter.addData(list);
+      //          recommendAdapter.addData(finalList);
                 recommendAdapter.notifyDataSetChanged();
                 bga.endRefreshing();
                 bga.endLoadingMore();
@@ -216,6 +215,7 @@ public class PageFragment extends LazyFragment implements BGARefreshLayout.BGARe
     @Override
     public void onBGARefreshLayoutBeginRefreshing(BGARefreshLayout refreshLayout) {
         getRecommendInterface(0, 5);
+        finalList.clear();
     }
 
     @Override
@@ -240,5 +240,10 @@ public class PageFragment extends LazyFragment implements BGARefreshLayout.BGARe
     // 通过代码方式控制进入加载更多状态
     public void beginLoadingMore() {
         bga.beginLoadingMore();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
     }
 }
