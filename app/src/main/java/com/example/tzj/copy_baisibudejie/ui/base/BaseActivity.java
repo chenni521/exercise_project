@@ -45,7 +45,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             //透明导航栏
 //            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-            getWindow().setNavigationBarColor(getResources().getColor(R.color.title_color,getTheme()));
+//            getWindow().setNavigationBarColor(getResources().getColor(R.color.title_color, getTheme()));
         }
         if (getContentLayout() != 0) {
             setContentView(getContentLayout());
@@ -77,6 +77,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         progressBarDialog.showLoading(isStart);
         progressBarDialog.show();
     }
+
+
 
     /**
      * 隐藏等待层

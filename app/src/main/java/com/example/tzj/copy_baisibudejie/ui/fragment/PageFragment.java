@@ -17,8 +17,8 @@ import com.example.tzj.copy_baisibudejie.R;
 import com.example.tzj.copy_baisibudejie.adapter.RecommendAdapter;
 import com.example.tzj.copy_baisibudejie.entity.Bean1;
 import com.example.tzj.copy_baisibudejie.entity.RecommendVo;
-import com.example.tzj.copy_baisibudejie.ui.ImageActivity;
-import com.example.tzj.copy_baisibudejie.ui.VideoActivity;
+import com.example.tzj.copy_baisibudejie.ui.activity.ImageActivity;
+import com.example.tzj.copy_baisibudejie.ui.activity.VideoActivity;
 import com.example.tzj.copy_baisibudejie.ui.base.BaseActivity;
 import com.example.tzj.copy_baisibudejie.ui.base.LazyFragment;
 import com.example.tzj.copy_baisibudejie.util.AllUrl;
@@ -33,9 +33,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.bingoogolapple.refreshlayout.BGAMoocStyleRefreshViewHolder;
-import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder;
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
-import cn.bingoogolapple.refreshlayout.BGARefreshViewHolder;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -89,7 +87,7 @@ public class PageFragment extends LazyFragment implements BGARefreshLayout.BGARe
         getRetrofit();
         getRecommendInterface(0, 5);
         //填充各控件的数据
-        recommendAdapter = new RecommendAdapter(finalList, getActivity());
+        recommendAdapter = new RecommendAdapter(finalList, getActivity(),getActivity());
         fragmentPageListview.setLayoutManager(new LinearLayoutManager(getActivity()));
         fragmentPageListview.setAdapter(recommendAdapter);
     }

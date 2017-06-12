@@ -13,6 +13,7 @@
     <color name="transparent">#00000000</color>
     <color name="custom_imoocstyle">#eb4f38</color>
     <color name="imoocstyle">#CA0612</color>
+    <color name="user_info_message_notice">#E35B5A</color>
 
     <!--标签背景颜色-->
     <color name="mask_tags_1">#f45170</color>

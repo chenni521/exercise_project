@@ -1,4 +1,4 @@
-package com.example.tzj.copy_baisibudejie.ui;
+package com.example.tzj.copy_baisibudejie.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
