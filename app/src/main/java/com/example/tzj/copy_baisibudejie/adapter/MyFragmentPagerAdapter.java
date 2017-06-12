@@ -28,7 +28,7 @@ public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
         } else if (position == 1) {
             return BlankFragment.newInstance(position + 1);
         }
-        return PageFragment.newInstance(position + 1);
+        return BlankFragment.newInstance(position + 1);
     }
 
     @Override
